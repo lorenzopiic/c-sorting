@@ -2,23 +2,23 @@
 #include<stdlib.h>
 #include<string.h>
 #include"c_sorting.h"
-
-/* Array di puntatori a funzione, JUMP TABLE */
+#include<time.h>
+/* Array of pointers to functions, JUMP TABLE */
 void (*doSort[3])(data dt) =
     { bubbleWrapper, insertionWrapper, selectionWrapper };
 
 int main(int argc, char **argv)
 {
 
-/* variabile delegata alla gestione del programma e alla interpretazione
- * dei possibili errori che potrebbero essere restituiti */
+ /* This var is needed to handle and interpretate any program errors */
     enum exitval status = 0;
 
-/* Utilizzo questa variabile che passo a chooseSort per capire
- * che tipo di oggetto allocare, se array, matrice o matrice di puntatori */
-    int typeChoice = 0;
+/* I use this variable that I pass to chooseSort to understand what type
+ * of object to allocate, whether an array, matrix, or array of pointers.*/ 
+	
+	int typeChoice = 0;
 
-    srand(12121);
+    srand(time(NULL));
 
     status = chooseSort(argc, argv, &typeChoice);
 
@@ -443,7 +443,7 @@ void bubbleMatrix(double **mat)
 
     for (unsigned j = 0; j < COLS; j++) {
         for (unsigned p = 1; p < ROWS; p++) {
-            for (unsigned i = 0; i < ROWS - 1 - p; i++) {
+            for (unsigned i = 0; i < ROWS - p; i++) {
                 if (mat[i][j] > mat[i + 1][j]) {
                     double temp = mat[i][j];
                     mat[i][j] = mat[i + 1][j];
