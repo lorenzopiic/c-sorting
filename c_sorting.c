@@ -3,6 +3,7 @@
 #include<string.h>
 #include"c_sorting.h"
 #include<time.h>
+
 /* Array of pointers to functions, JUMP TABLE */
 void (*doSort[3])(data dt) =
     { bubbleWrapper, insertionWrapper, selectionWrapper };
@@ -36,11 +37,15 @@ int main(int argc, char **argv)
         fprintf(stderr, "%s\n", warnmsg[mydata.exitStatus]);
         return 1;
     }
-/* Questo indice serve a chiamare la funzione wrapper dell'algoritmo di ordinamento scelto.
- * Il calcolo poco intuitivo è dovuto ad un erorre di progettazione che ho fatto:
- * nella enum exitval ho mappato prima alcune ricorrenti situazione di errore, e solo dopo ho iniziato
- * ad enumerare i vari STATUS del programma... BUBBLE_ARRAY è il primo caso enumerato, per cui va sottratto per
- * operare correttamente la divisione, il cui modulo restituisce correttamente il wraper da chiamare. */
+/**************************************************** [algID] ********************************************************
+  
+ 	Questo indice serve a chiamare la funzione wrapper dell'algoritmo di ordinamento scelto.
+  	Il calcolo poco intuitivo è dovuto ad un erorre di progettazione che ho fatto:
+  	nella enum exitval ho mappato prima alcune ricorrenti situazione di errore, e solo dopo ho iniziato
+  	ad enumerare i vari STATUS del programma... BUBBLE_ARRAY è il primo caso enumerato, per cui va sottratto per
+  	operare correttamente la divisione, il cui modulo restituisce correttamente il wraper da chiamare. 
+ 
+ ******************************************************************************************************************/
     int algID = (status - BUBBLE_ARRAY) / 3;
     if (algID < 0 || algID > 2) {
         fprintf(stderr,
