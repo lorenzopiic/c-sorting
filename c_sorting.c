@@ -4,18 +4,30 @@
 #include"c_sorting.h"
 #include<time.h>
 
-/* Array of pointers to functions, JUMP TABLE */
-void (*doSort[3])(data dt) =
-    { bubbleWrapper, insertionWrapper, selectionWrapper };
+// // // // // // // // // // // // // // // //
+// Array of pointers to functions, JUMP TABLE  
+//
+void (*doSort[3])(data dt) = 
+{ 
+	bubbleWrapper,
+   	insertionWrapper,
+   	selectionWrapper 
+};
 
 int main(int argc, char **argv)
 {
+					       /* exitval */
+// ================================================================ //
+/* This var is needed to handle and interpretate any program errors */
+// ================================================================ //
+    
+	enum exitval status = 0;
 
- /* This var is needed to handle and interpretate any program errors */
-    enum exitval status = 0;
-
-/* I use this variable that I pass to chooseSort to understand what type
- * of object to allocate, whether an array, matrix, or array of pointers.*/ 
+						    /* typeChoice */
+// ======================================================================= //
+// I use this variable that I pass to chooseSort to understand what type   //
+// of object to allocate, whether an array, matrix, or array of pointersi  // 
+// ======================================================================= //
 	
 	int typeChoice = 0;
 
@@ -143,14 +155,15 @@ enum exitval chooseSort(int argc, char **argv, int *typeChoice)
        alla variabile che vive nel nostro main */
     *typeChoice = typeID;
 
-/* In questo switch annidato il programma gestisce sortID, un numero che rappresenta
- * l'indice dell'array di stringhe "sortsNames", che contiene proprio i nomi dei 3 sort.
- * sortID viene impostato nel momento in cui la stringa inserita dall'utente, prima
- * contenuta in argv[1], poi copiata nel buffer temporaneo, corrisponde esattamente ad una
- * delle stringhe dell'array "sortsNames"; questo viene verificato grazie alla funzione
- * strcmp che restituisce 0 proprio quando le due stringhe sono identiche ;
- * Il secondo switch annidato gestisce in maniera del tutto analoga typeID */
-
+// <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+// In questo switch annidato il programma gestisce sortID, un numero che rappresenta
+// l'indice dell'array di stringhe "sortsNames", che contiene proprio i nomi dei 3 sort.
+// sortID viene impostato nel momento in cui la stringa inserita dall'utente, prima
+// contenuta in argv[1], poi copiata nel buffer temporaneo, corrisponde esattamente ad una
+// delle stringhe dell'array "sortsNames"; questo viene verificato grazie alla funzione
+// strcmp che restituisce 0 proprio quando le due stringhe sono identiche ;
+// Il secondo switch annidato gestisce in maniera del tutto analoga typeID 
+//
     switch (sortID) {
     case 0:                    // BUBBLE
         switch (typeID) {
